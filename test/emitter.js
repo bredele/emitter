@@ -37,6 +37,20 @@ describe('Emitter', function(){
 
       calls.should.eql([ 'one', 1, 'two', 1, 'one', 2, 'two', 2 ]);
     })
+
+    it('should only add function listeners', function() {
+      var emitter = new Emitter
+        , called = false
+
+      emitter.on('foo', undefined);
+      try {
+        emitter.emit('foo');
+      } catch(_) {
+        called = true;
+      }
+
+      called.should.be.false;
+    })
   })
 
   describe('.once(event, fn)', function(){

@@ -42,8 +42,10 @@ function mixin(obj) {
 Emitter.prototype.on =
 Emitter.prototype.addEventListener = function(event, fn){
   this._callbacks = this._callbacks || {};
-  (this._callbacks[event] = this._callbacks[event] || [])
-    .push(fn);
+  if(typeof fn === 'function') {
+    (this._callbacks[event] = this._callbacks[event] || [])
+        .push(fn);
+  }
   return this;
 };
 
